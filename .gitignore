@@ -1,0 +1,6 @@
+# IDE Specifics
+
+/.idea
+
+# 2rd parties
+/vendor
