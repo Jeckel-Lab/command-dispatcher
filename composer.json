@@ -1,0 +1,30 @@
+{
+    "name": "jeckel-lab/command-dispatcher",
+    "description": "Command dispatcher implementation",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Julien Mercier-Rojas",
+            "email": "julien@jeckel-lab.fr"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "JeckelLab\\ContainerDispatcher\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\JeckelLab\\ContainerDispatcher\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "psr/event-dispatcher": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    }
+}
