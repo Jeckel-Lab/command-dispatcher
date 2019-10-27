@@ -13,18 +13,5 @@ namespace JeckelLab\ContainerDispatcher;
  */
 interface CommandInterface
 {
-    /**
-     * @return bool
-     */
-    public function isAck(): bool;
 
-    /**
-     * @return bool
-     */
-    public function isNack(): bool;
-
-    /**
-     * @return null|iterable
-     */
-    public function getEvents(): ?iterable;
 }

@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace JeckelLab\ContainerDispatcher;
 
 use JeckelLab\ContainerDispatcher\Resolver\CommandHandlerResolverInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class CommandDispatcher
@@ -20,10 +21,39 @@ class CommandDispatcher implements CommandDispatcherInterface
      */
     protected $commandHandlerResolver;
 
+    /**
+     * @var EventDispatcherInterface|null
+     */
+    protected $eventDispatcher;
+
+    /**
+     * CommandDispatcher constructor.
+     * @param CommandHandlerResolverInterface $commandHandlerResolver
+     * @param EventDispatcherInterface|null   $eventDispatcher
+     */
+    public function __construct(CommandHandlerResolverInterface $commandHandlerResolver, ?EventDispatcherInterface $eventDispatcher)
+    {
+        $this->commandHandlerResolver = $commandHandlerResolver;
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
+    /**
+     * @param CommandInterface $command
+     * @return CommandResponseInterface
+     */
     public function dispatch(CommandInterface $command): CommandResponseInterface
     {
         $handler = $this->commandHandlerResolver->resolve($command);
 
-        return $handler->handle($command);
+        /** @var  $response */
+        $response = $handler->handle($command);
+
+        if (null !== $this->eventDispatcher) {
+            foreach($response->getEvents() as $event) {
+                $this->eventDispatcher->dispatch($event);
+            }
+        }
+
+        return $response;
     }
 }
