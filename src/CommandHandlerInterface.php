@@ -13,6 +13,11 @@ namespace JeckelLab\ContainerDispatcher;
 interface CommandHandlerInterface
 {
     /**
+     * @return array
+     */
+    public static function getHandledCommands(): array;
+
+    /**
      * @param CommandInterface $command
      * @return CommandResponseInterface
      */

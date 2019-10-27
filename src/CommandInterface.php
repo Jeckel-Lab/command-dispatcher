@@ -13,5 +13,4 @@ namespace JeckelLab\ContainerDispatcher;
  */
 interface CommandInterface
 {
-
 }
