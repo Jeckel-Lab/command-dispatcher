@@ -23,11 +23,13 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
 
     /**
      * @param CommandHandlerInterface $handler
+     * @param array|null              $commands
      * @return $this
      */
-    public function registerHandler(CommandHandlerInterface $handler): self
+    public function registerHandler(CommandHandlerInterface $handler, ?array $commands = null): self
     {
-        foreach ($handler::getHandledCommands() as $commandName) {
+        $commands = $commands?: $handler::getHandledCommands();
+        foreach ($commands as $commandName) {
             $this->handlers[$commandName] = $handler;
         }
         return $this;
