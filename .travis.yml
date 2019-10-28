@@ -3,8 +3,13 @@ php:
   - '7.2'
   - '7.3'
 
-before_script: composer install -n
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction --prefer-source --dev
 
 script:
-    - ./vendor/bin/phpstan analyse
-  #- ./vendor/bin/phpunit --bootstrap vendor/autoload.php tests
+#  - ./vendor/bin/phpunit --coverage-clover=coverage.xml
+  - ./vendor/bin/phpmd src text cleancode,codesize,design,naming,unusedcode
+#  - ./vendor/bin/phpcs
+  - ./vendor/bin/phpstan analyse
+
