@@ -3,6 +3,9 @@
 /.idea
 /php.sh
 
+# Env files
+/.env
+
 # 2rd parties
 /vendor
 
