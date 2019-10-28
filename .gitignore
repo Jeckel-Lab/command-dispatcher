@@ -8,3 +8,4 @@
 
 # Temporary files
 /.phpcs-cache
+/.phpunit.result.cache
