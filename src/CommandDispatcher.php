@@ -46,7 +46,7 @@ class CommandDispatcher implements CommandDispatcherInterface
         $handler = $this->commandHandlerResolver->resolve($command);
 
         /** @var  $response */
-        $response = $handler->handle($command);
+        $response = $handler($command);
 
         if (null !== $this->eventDispatcher) {
             foreach($response->getEvents() as $event) {

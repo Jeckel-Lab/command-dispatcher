@@ -21,5 +21,5 @@ interface CommandHandlerInterface
      * @param CommandInterface $command
      * @return CommandResponseInterface
      */
-    public function handle(CommandInterface $command): CommandResponseInterface;
+    public function __invoke(CommandInterface $command): CommandResponseInterface;
 }
