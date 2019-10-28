@@ -45,10 +45,10 @@ class CommandDispatcher implements CommandDispatcherInterface
     {
         $handler = $this->commandHandlerResolver->resolve($command);
 
-        /** @var  $response */
+        /** @var CommandResponseInterface $response */
         $response = $handler($command);
 
-        if (null !== $this->eventDispatcher) {
+        if (null !== $this->eventDispatcher && null !== $response->getEvents()) {
             foreach($response->getEvents() as $event) {
                 $this->eventDispatcher->dispatch($event);
             }
