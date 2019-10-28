@@ -19,7 +19,7 @@ class CommandDispatcher implements CommandDispatcherInterface
     /**
      * @var CommandHandlerResolverInterface
      */
-    protected $commandHandlerResolver;
+    protected $resolver;
 
     /**
      * @var EventDispatcherInterface|null
@@ -28,12 +28,12 @@ class CommandDispatcher implements CommandDispatcherInterface
 
     /**
      * CommandDispatcher constructor.
-     * @param CommandHandlerResolverInterface $commandHandlerResolver
+     * @param CommandHandlerResolverInterface $resolver
      * @param EventDispatcherInterface|null   $eventDispatcher
      */
-    public function __construct(CommandHandlerResolverInterface $commandHandlerResolver, ?EventDispatcherInterface $eventDispatcher)
+    public function __construct(CommandHandlerResolverInterface $resolver, ?EventDispatcherInterface $eventDispatcher)
     {
-        $this->commandHandlerResolver = $commandHandlerResolver;
+        $this->resolver = $resolver;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -43,13 +43,13 @@ class CommandDispatcher implements CommandDispatcherInterface
      */
     public function dispatch(CommandInterface $command): CommandResponseInterface
     {
-        $handler = $this->commandHandlerResolver->resolve($command);
+        $handler = $this->resolver->resolve($command);
 
         /** @var CommandResponseInterface $response */
         $response = $handler($command);
 
         if (null !== $this->eventDispatcher && null !== $response->getEvents()) {
-            foreach($response->getEvents() as $event) {
+            foreach ($response->getEvents() as $event) {
                 $this->eventDispatcher->dispatch($event);
             }
         }

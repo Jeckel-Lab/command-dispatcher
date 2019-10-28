@@ -16,6 +16,5 @@ final class CommandDispatcherTest extends TestCase
      */
     public function testDispatch()
     {
-
     }
 }

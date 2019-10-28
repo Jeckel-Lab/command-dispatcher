@@ -26,6 +26,7 @@
   "require-dev": {
     "phpunit/phpunit": "^8.4",
     "phpstan/phpstan": "^0.11.19",
-    "phpmd/phpmd": "^2.7"
+    "phpmd/phpmd": "^2.7",
+    "squizlabs/php_codesniffer": "^3.5"
   }
 }

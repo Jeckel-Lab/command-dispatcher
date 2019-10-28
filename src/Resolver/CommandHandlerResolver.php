@@ -27,7 +27,7 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
      */
     public function registerHandler(CommandHandlerInterface $handler): self
     {
-        foreach($handler::getHandledCommands() as $commandName) {
+        foreach ($handler::getHandledCommands() as $commandName) {
             $this->handlers[$commandName] = $handler;
         }
         return $this;
@@ -43,7 +43,7 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
             return $this->handlers[get_class($command)];
         }
 
-        foreach($this->handlers as $commandName=>$handler) {
+        foreach ($this->handlers as $commandName => $handler) {
             if ($command instanceof $commandName) {
                 return $handler;
             }
