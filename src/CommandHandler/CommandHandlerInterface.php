@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace JeckelLab\ContainerDispatcher\CommandHandler;
 
 use JeckelLab\ContainerDispatcher\Command\CommandInterface;
-use JeckelLab\ContainerDispatcher\CommandResponseInterface;
+use JeckelLab\ContainerDispatcher\CommandResponse\CommandResponseInterface;
 
 /**
  * Interface CommandHandlerInterface

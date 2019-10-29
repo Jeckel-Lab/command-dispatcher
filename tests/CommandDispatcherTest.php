@@ -6,7 +6,7 @@ namespace Tests\JeckelLab\ContainerDispatcher;
 use JeckelLab\ContainerDispatcher\CommandDispatcher;
 use JeckelLab\ContainerDispatcher\CommandHandler\CommandHandlerInterface;
 use JeckelLab\ContainerDispatcher\Command\CommandInterface;
-use JeckelLab\ContainerDispatcher\CommandResponseInterface;
+use JeckelLab\ContainerDispatcher\CommandResponse\CommandResponseInterface;
 use JeckelLab\ContainerDispatcher\Resolver\CommandHandlerResolverInterface;
 use JeckelLab\ContainerDispatcher\Resolver\HandlerNotFoundException;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -59,9 +59,9 @@ final class CommandDispatcherTest extends TestCase
     }
 
     /**
-     * @test dispatch
+     * Test dispatch with no event dispatcher configured
      */
-    public function testDispatchWoEventDispatcher()
+    public function testDispatchWoEventDispatcher(): void
     {
         $this->response->expects($this->never())
             ->method('getEvents');
@@ -81,7 +81,10 @@ final class CommandDispatcherTest extends TestCase
         $this->assertSame($this->response, $dispatcher->dispatch($this->command));
     }
 
-    public function testDispatchWEventDispatcherWOEvents()
+    /**
+     * Test dispatch with event dispatcher but no events returned in response
+     */
+    public function testDispatchWEventDispatcherWOEvents(): void
     {
         $this->response->expects($this->once())
             ->method('getEvents')
@@ -101,7 +104,10 @@ final class CommandDispatcherTest extends TestCase
         $this->assertSame($this->response, $dispatcher->dispatch($this->command));
     }
 
-    public function testDispatchWEventDispatcherWEvent()
+    /**
+     * Test dispatch with event dispatcher and on event returned in response
+     */
+    public function testDispatchWEventDispatcherWEvent(): void
     {
         $event = new stdClass();
 
@@ -124,7 +130,10 @@ final class CommandDispatcherTest extends TestCase
         $this->assertSame($this->response, $dispatcher->dispatch($this->command));
     }
 
-    public function testDispatchWEventDispatcherWMultipleEvents()
+    /**
+     * Test dispatch with event dispatcher and multiple event returned in response
+     */
+    public function testDispatchWEventDispatcherWMultipleEvents(): void
     {
         $event1 = new stdClass();
         $event2 = new stdClass();
@@ -148,7 +157,10 @@ final class CommandDispatcherTest extends TestCase
         $this->assertSame($this->response, $dispatcher->dispatch($this->command));
     }
 
-    public function testDispatchWithErrorResolver()
+    /**
+     * Test dispatch when resolver throw an Exception (no handler founds)
+     */
+    public function testDispatchWithErrorResolver(): void
     {
         $exception = new HandlerNotFoundException('foo bar');
 

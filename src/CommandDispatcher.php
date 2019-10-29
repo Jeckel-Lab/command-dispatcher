@@ -9,6 +9,7 @@ namespace JeckelLab\ContainerDispatcher;
 
 use JeckelLab\ContainerDispatcher\Command\CommandInterface;
 use JeckelLab\ContainerDispatcher\CommandHandler\CommandHandlerInterface;
+use JeckelLab\ContainerDispatcher\CommandResponse\CommandResponseInterface;
 use JeckelLab\ContainerDispatcher\Resolver\CommandHandlerResolverInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
