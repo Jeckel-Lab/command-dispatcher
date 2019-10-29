@@ -7,10 +7,17 @@ declare(strict_types=1);
 
 namespace JeckelLab\ContainerDispatcher;
 
+use JeckelLab\ContainerDispatcher\Command\CommandInterface;
+use JeckelLab\ContainerDispatcher\CommandResponse\CommandResponseInterface;
+
 /**
  * Interface ContainerDispatcherInterface
  */
 interface CommandDispatcherInterface
 {
+    /**
+     * @param CommandInterface $command
+     * @return CommandResponseInterface
+     */
     public function dispatch(CommandInterface $command): CommandResponseInterface;
 }

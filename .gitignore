@@ -3,8 +3,12 @@
 /.idea
 /php.sh
 
+# Env files
+/.env
+
 # 2rd parties
 /vendor
 
 # Temporary files
 /.phpcs-cache
+/.phpunit.result.cache
