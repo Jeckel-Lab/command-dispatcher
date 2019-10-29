@@ -14,5 +14,9 @@ use JeckelLab\ContainerDispatcher\Command\CommandInterface;
  */
 interface CommandDispatcherInterface
 {
+    /**
+     * @param CommandInterface $command
+     * @return CommandResponseInterface
+     */
     public function dispatch(CommandInterface $command): CommandResponseInterface;
 }

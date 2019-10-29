@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\JeckelLab\ContainerDispatcher\Resolver;
 
-use JeckelLab\ContainerDispatcher\CommandHandlerInterface;
+use JeckelLab\ContainerDispatcher\CommandHandler\CommandHandlerInterface;
 use JeckelLab\ContainerDispatcher\Command\CommandInterface;
 use JeckelLab\ContainerDispatcher\Resolver\CommandHandlerResolver;
 use JeckelLab\ContainerDispatcher\Resolver\HandlerNotFoundException;

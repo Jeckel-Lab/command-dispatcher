@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace JeckelLab\ContainerDispatcher;
 
 use JeckelLab\ContainerDispatcher\Command\CommandInterface;
+use JeckelLab\ContainerDispatcher\CommandHandler\CommandHandlerInterface;
 use JeckelLab\ContainerDispatcher\Resolver\CommandHandlerResolverInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
@@ -46,6 +47,7 @@ class CommandDispatcher implements CommandDispatcherInterface
      */
     public function dispatch(CommandInterface $command): CommandResponseInterface
     {
+        /** @var CommandHandlerInterface $handler */
         $handler = $this->resolver->resolve($command);
 
         /** @var CommandResponseInterface $response */
