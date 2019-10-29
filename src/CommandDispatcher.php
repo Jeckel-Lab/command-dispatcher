@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace JeckelLab\ContainerDispatcher;
 
+use JeckelLab\ContainerDispatcher\Command\CommandInterface;
 use JeckelLab\ContainerDispatcher\Resolver\CommandHandlerResolverInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 

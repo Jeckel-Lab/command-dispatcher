@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Created at : 27/10/2019
  */
 
-namespace JeckelLab\ContainerDispatcher;
+namespace JeckelLab\ContainerDispatcher\Command;
 
 /**
  * Interface CommandInterface
