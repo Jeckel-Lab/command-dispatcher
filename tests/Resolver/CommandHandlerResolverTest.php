@@ -8,6 +8,7 @@ use JeckelLab\ContainerDispatcher\Command\CommandInterface;
 use JeckelLab\ContainerDispatcher\Resolver\CommandHandlerResolver;
 use JeckelLab\ContainerDispatcher\Resolver\HandlerNotFoundException;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class CommandHandlerResolverTest
@@ -39,12 +40,36 @@ final class CommandHandlerResolverTest extends TestCase
         $this->resolver->resolve($this->createMock(CommandInterface::class));
     }
 
-    public function testResolve(): void
+    /**
+     * Test resolve without container
+     */
+    public function testResolveWithoutContainer(): void
     {
         $command = $this->createMock(CommandInterface::class);
         $handler = $this->createMock(CommandHandlerInterface::class);
 
         $this->assertSame($this->resolver, $this->resolver->registerHandler($handler, [get_class($command)]));
         $this->assertSame($handler, $this->resolver->resolve($command));
+    }
+
+    public function testResolveWithContainer(): void
+    {
+        $handlerName = 'command.handler';
+
+        $command = $this->createMock(CommandInterface::class);
+        $handler = $this->createMock(CommandHandlerInterface::class);
+        $container = $this->createMock(ContainerInterface::class);
+        $container->expects($this->once())
+            ->method('has')
+            ->with($handlerName)
+            ->willReturn(true);
+        $container->expects($this->once())
+            ->method('get')
+            ->with($handlerName)
+            ->willReturn($handler);
+
+        $resolver = new CommandHandlerResolver($container);
+        $this->assertSame($resolver, $resolver->registerHandlerService($handlerName, [get_class($command)]));
+        $this->assertSame($handler, $resolver->resolve($command));
     }
 }
