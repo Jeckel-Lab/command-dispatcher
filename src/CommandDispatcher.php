@@ -45,6 +45,7 @@ class CommandDispatcher implements CommandDispatcherInterface
     /**
      * @param CommandInterface $command
      * @return CommandResponseInterface
+     * @SuppressWarnings(PHPMD.IfStatementAssignment)
      */
     public function dispatch(CommandInterface $command): CommandResponseInterface
     {

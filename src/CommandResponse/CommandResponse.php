@@ -20,6 +20,8 @@ class CommandResponse implements CommandResponseInterface
      * CommandResponseAbstract constructor.
      * @param bool          $ack
      * @param iterable|null $events
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function __construct(bool $ack = true, ?iterable $events = null)
     {
