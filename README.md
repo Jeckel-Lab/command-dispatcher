@@ -1,4 +1,5 @@
 # Command Dispatcher
+[![CircleCI](https://circleci.com/gh/Jeckel-Lab/command-dispatcher/tree/master.svg?style=svg)](https://circleci.com/gh/Jeckel-Lab/command-dispatcher/tree/master)
 
 ***Work In Progress***
 
