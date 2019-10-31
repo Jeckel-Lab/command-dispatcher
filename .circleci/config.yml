@@ -40,6 +40,33 @@ jobs:
           at: /app
       - run: ./vendor/bin/phpcs
 
+  phpmd:
+    docker:
+      - image: jeckel/php-test:7.3-cli-alpine
+    working_directory: /app/project
+    steps:
+      - attach_workspace:
+          at: /app
+      - run: ./vendor/bin/phpmd src text cleancode,codesize,design,naming,unusedcode
+
+  phpstan:
+    docker:
+      - image: jeckel/php-test:7.3-cli-alpine
+    working_directory: /app/project
+    steps:
+      - attach_workspace:
+          at: /app
+      - run: ./vendor/bin/phpstan analyse
+
+  phpunit:
+    docker:
+      - image: jeckel/php-test:7.3-cli-alpine
+    working_directory: /app/project
+    steps:
+      - attach_workspace:
+          at: /app
+      - run: ./vendor/bin/phpunit --coverage-clover=coverage.xml
+
 # Define the workflow:
 workflows:
   version: 2
@@ -49,5 +76,14 @@ workflows:
       # Always run:
       - build
       - phpcs:
+          requires:
+            - build
+      - phpmd:
+          requires:
+            - build
+      - phpunit:
+          requires:
+            - build
+      - phpstan:
           requires:
             - build
