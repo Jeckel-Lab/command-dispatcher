@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace JeckelLab\ContainerDispatcher;
 
-use JeckelLab\ContainerDispatcher\Resolver\CommandHandlerResolver;
-use JeckelLab\ContainerDispatcher\Resolver\CommandHandlerResolverInterface;
+use JeckelLab\ContainerDispatcher\Compiler\RegisterServicesPass;
+use JeckelLab\ContainerDispatcher\Compiler\CommandHandlerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -24,9 +24,7 @@ class CommandDispatcherBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
-        parent::build($container);
-        $container->addCompilerPass(new CommandHandlerPass());
-        $container->autowire(CommandHandlerResolverInterface::class, CommandHandlerResolver::class);
-        $container->autowire(CommandDispatcherInterface::class, CommandDispatcher::class);
+        $container->addCompilerPass(new RegisterServicesPass());
+        $container->addCompilerPass(new CommandHandlerPass('command_dispatcher.handler'));
     }
 }

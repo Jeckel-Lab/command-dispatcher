@@ -29,38 +29,13 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
 
     /**
      * CommandHandlerResolver constructor.
-     * @param ContainerInterface|null $container
+     * @param array              $handlers
+     * @param ContainerInterface $container
      */
-    public function __construct(?ContainerInterface $container = null)
+    public function __construct(array $handlers = null, ?ContainerInterface $container = null)
     {
+        $this->handlers = $handlers;
         $this->container = $container;
-    }
-
-    /**
-     * @param CommandHandlerInterface $handler
-     * @param array|null              $commands
-     * @return $this
-     */
-    public function registerHandler(CommandHandlerInterface $handler, ?array $commands = null): self
-    {
-        $commands = $commands?: $handler::getHandledCommands();
-        foreach ($commands as $commandName) {
-            $this->handlers[$commandName] = $handler;
-        }
-        return $this;
-    }
-
-    /**
-     * @param string $handlerService
-     * @param array  $commands
-     * @return $this
-     */
-    public function registerHandlerService(string $handlerService, array $commands): self
-    {
-        foreach ($commands as $commandName) {
-            $this->handlers[$commandName] = $handlerService;
-        }
-        return $this;
     }
 
     /**
