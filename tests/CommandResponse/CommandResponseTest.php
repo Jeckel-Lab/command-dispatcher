@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\JeckelLab\ContainerDispatcher\CommandResponse;
+namespace Tests\JeckelLab\CommandDispatcher\CommandResponse;
 
-use JeckelLab\ContainerDispatcher\CommandResponse\CommandResponse;
+use JeckelLab\CommandDispatcher\CommandResponse\CommandResponse;
 use PHPUnit\Framework\TestCase;
 
 /**

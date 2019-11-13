@@ -5,17 +5,17 @@ declare(strict_types=1);
  * Created at : 27/10/2019
  */
 
-namespace JeckelLab\ContainerDispatcher;
+namespace JeckelLab\CommandDispatcher;
 
-use JeckelLab\ContainerDispatcher\Command\CommandInterface;
-use JeckelLab\ContainerDispatcher\CommandHandler\CommandHandlerInterface;
-use JeckelLab\ContainerDispatcher\CommandResponse\CommandResponseInterface;
-use JeckelLab\ContainerDispatcher\Resolver\CommandHandlerResolverInterface;
+use JeckelLab\CommandDispatcher\Command\CommandInterface;
+use JeckelLab\CommandDispatcher\CommandHandler\CommandHandlerInterface;
+use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseInterface;
+use JeckelLab\CommandDispatcher\Resolver\CommandHandlerResolverInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class CommandDispatcher
- * @package JeckelLab\ContainerDispatcher
+ * @package JeckelLab\CommandDispatcher
  */
 class CommandDispatcher implements CommandDispatcherInterface
 {

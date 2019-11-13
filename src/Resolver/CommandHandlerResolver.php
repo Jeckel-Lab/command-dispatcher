@@ -5,15 +5,15 @@ declare(strict_types=1);
  * Created at : 27/10/2019
  */
 
-namespace JeckelLab\ContainerDispatcher\Resolver;
+namespace JeckelLab\CommandDispatcher\Resolver;
 
-use JeckelLab\ContainerDispatcher\CommandHandler\CommandHandlerInterface;
-use JeckelLab\ContainerDispatcher\Command\CommandInterface;
+use JeckelLab\CommandDispatcher\CommandHandler\CommandHandlerInterface;
+use JeckelLab\CommandDispatcher\Command\CommandInterface;
 use Psr\Container\ContainerInterface;
 
 /**
  * Class CommandHandlerResolver
- * @package JeckelLab\ContainerDispatcher\Resolver
+ * @package JeckelLab\CommandDispatcher\Resolver
  */
 class CommandHandlerResolver implements CommandHandlerResolverInterface
 {
@@ -29,38 +29,13 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
 
     /**
      * CommandHandlerResolver constructor.
+     * @param array                   $handlers
      * @param ContainerInterface|null $container
      */
-    public function __construct(?ContainerInterface $container = null)
+    public function __construct(array $handlers = [], ?ContainerInterface $container = null)
     {
+        $this->handlers = $handlers;
         $this->container = $container;
-    }
-
-    /**
-     * @param CommandHandlerInterface $handler
-     * @param array|null              $commands
-     * @return $this
-     */
-    public function registerHandler(CommandHandlerInterface $handler, ?array $commands = null): self
-    {
-        $commands = $commands?: $handler::getHandledCommands();
-        foreach ($commands as $commandName) {
-            $this->handlers[$commandName] = $handler;
-        }
-        return $this;
-    }
-
-    /**
-     * @param string $handlerService
-     * @param array  $commands
-     * @return $this
-     */
-    public function registerHandlerService(string $handlerService, array $commands): self
-    {
-        foreach ($commands as $commandName) {
-            $this->handlers[$commandName] = $handlerService;
-        }
-        return $this;
     }
 
     /**

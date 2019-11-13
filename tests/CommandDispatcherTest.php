@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\JeckelLab\ContainerDispatcher;
+namespace Tests\JeckelLab\CommandDispatcher;
 
-use JeckelLab\ContainerDispatcher\CommandDispatcher;
-use JeckelLab\ContainerDispatcher\CommandHandler\CommandHandlerInterface;
-use JeckelLab\ContainerDispatcher\Command\CommandInterface;
-use JeckelLab\ContainerDispatcher\CommandResponse\CommandResponseInterface;
-use JeckelLab\ContainerDispatcher\Resolver\CommandHandlerResolverInterface;
-use JeckelLab\ContainerDispatcher\Resolver\HandlerNotFoundException;
+use JeckelLab\CommandDispatcher\CommandDispatcher;
+use JeckelLab\CommandDispatcher\CommandHandler\CommandHandlerInterface;
+use JeckelLab\CommandDispatcher\Command\CommandInterface;
+use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseInterface;
+use JeckelLab\CommandDispatcher\Resolver\CommandHandlerResolverInterface;
+use JeckelLab\CommandDispatcher\Resolver\HandlerNotFoundException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\EventDispatcher\EventDispatcherInterface;

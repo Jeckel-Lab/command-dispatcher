@@ -5,14 +5,14 @@ declare(strict_types=1);
  * Created at : 27/10/2019
  */
 
-namespace JeckelLab\ContainerDispatcher\Resolver;
+namespace JeckelLab\CommandDispatcher\Resolver;
 
-use JeckelLab\ContainerDispatcher\CommandHandler\CommandHandlerInterface;
-use JeckelLab\ContainerDispatcher\Command\CommandInterface;
+use JeckelLab\CommandDispatcher\CommandHandler\CommandHandlerInterface;
+use JeckelLab\CommandDispatcher\Command\CommandInterface;
 
 /**
  * Interface CommandHandlerResolverInterface
- * @package JeckelLab\ContainerDispatcher
+ * @package JeckelLab\CommandDispatcher\Resolver
  */
 interface CommandHandlerResolverInterface
 {

@@ -11,12 +11,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "JeckelLab\\ContainerDispatcher\\": "src/"
+      "JeckelLab\\CommandDispatcher\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\JeckelLab\\ContainerDispatcher\\": "tests/"
+      "Tests\\JeckelLab\\CommandDispatcher\\": "tests/"
     }
   },
   "require": {
