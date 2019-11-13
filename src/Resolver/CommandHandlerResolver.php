@@ -29,10 +29,10 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
 
     /**
      * CommandHandlerResolver constructor.
-     * @param array              $handlers
-     * @param ContainerInterface $container
+     * @param array                   $handlers
+     * @param ContainerInterface|null $container
      */
-    public function __construct(array $handlers = null, ?ContainerInterface $container = null)
+    public function __construct(array $handlers = [], ?ContainerInterface $container = null)
     {
         $this->handlers = $handlers;
         $this->container = $container;
