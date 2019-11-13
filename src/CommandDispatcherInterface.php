@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Created at : 27/10/2019
  */
 
-namespace JeckelLab\ContainerDispatcher;
+namespace JeckelLab\CommandDispatcher;
 
-use JeckelLab\ContainerDispatcher\Command\CommandInterface;
-use JeckelLab\ContainerDispatcher\CommandResponse\CommandResponseInterface;
+use JeckelLab\CommandDispatcher\Command\CommandInterface;
+use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseInterface;
 
 /**
  * Interface ContainerDispatcherInterface

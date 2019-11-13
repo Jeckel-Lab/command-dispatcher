@@ -5,13 +5,13 @@ declare(strict_types=1);
  * Created at : 27/10/2019
  */
 
-namespace JeckelLab\ContainerDispatcher\Resolver;
+namespace JeckelLab\CommandDispatcher\Resolver;
 
 use RuntimeException;
 
 /**
  * Class HandlerNotFoundException
- * @package JeckelLab\ContainerDispatcher\Resolver
+ * @package JeckelLab\CommandDispatcher\Resolver
  */
 class HandlerNotFoundException extends RuntimeException
 {

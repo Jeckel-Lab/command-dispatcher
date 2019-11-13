@@ -5,15 +5,15 @@ declare(strict_types=1);
  * Created at : 27/10/2019
  */
 
-namespace JeckelLab\ContainerDispatcher\Resolver;
+namespace JeckelLab\CommandDispatcher\Resolver;
 
-use JeckelLab\ContainerDispatcher\CommandHandler\CommandHandlerInterface;
-use JeckelLab\ContainerDispatcher\Command\CommandInterface;
+use JeckelLab\CommandDispatcher\CommandHandler\CommandHandlerInterface;
+use JeckelLab\CommandDispatcher\Command\CommandInterface;
 use Psr\Container\ContainerInterface;
 
 /**
  * Class CommandHandlerResolver
- * @package JeckelLab\ContainerDispatcher\Resolver
+ * @package JeckelLab\CommandDispatcher\Resolver
  */
 class CommandHandlerResolver implements CommandHandlerResolverInterface
 {

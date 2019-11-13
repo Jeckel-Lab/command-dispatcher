@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Created at : 29/10/2019
  */
 
-namespace JeckelLab\ContainerDispatcher\CommandResponse;
+namespace JeckelLab\CommandDispatcher\CommandResponse;
 
 /**
  * Trait CommandResponseEventsTrait
- * @package DDDI\Command
+ * @package JeckelLab\CommandDispatcher\CommandResponse
  */
 trait CommandResponseEventsTrait
 {

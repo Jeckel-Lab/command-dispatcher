@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Created at : 29/10/2019
  */
 
-namespace JeckelLab\ContainerDispatcher\CommandResponse;
+namespace JeckelLab\CommandDispatcher\CommandResponse;
 
 /**
- * Class CommandResponseAbstract
- * @package DDDI\Command
+ * Class CommandResponse
+ * @package JeckelLab\CommandDispatcher\CommandResponse
  */
 class CommandResponse implements CommandResponseInterface
 {

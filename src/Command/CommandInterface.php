@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Created at : 27/10/2019
  */
 
-namespace JeckelLab\ContainerDispatcher\Command;
+namespace JeckelLab\CommandDispatcher\Command;
 
 /**
  * Interface CommandInterface
- * @package JeckelLab\ContainerDispatcher
+ * @package JeckelLab\CommandDispatcher\Command
  */
 interface CommandInterface
 {
