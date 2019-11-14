@@ -9,6 +9,7 @@ namespace JeckelLab\CommandDispatcher\CommandHandler;
 
 use JeckelLab\CommandDispatcher\Command\CommandInterface;
 use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseInterface;
+use JeckelLab\CommandDispatcher\Exception\InvalidCommandException;
 
 /**
  * Interface CommandHandlerInterface
@@ -24,6 +25,7 @@ interface CommandHandlerInterface
     /**
      * @param CommandInterface $command
      * @return CommandResponseInterface
+     * @throws InvalidCommandException
      */
     public function __invoke(CommandInterface $command): CommandResponseInterface;
 }
