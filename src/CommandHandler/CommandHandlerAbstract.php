@@ -22,7 +22,7 @@ abstract class CommandHandlerAbstract implements CommandHandlerInterface
      */
     protected function validateCommand(CommandInterface $command): void
     {
-        foreach (self::getHandledCommands() as $handledCommand) {
+        foreach (static::getHandledCommands() as $handledCommand) {
             if ($command instanceof $handledCommand) {
                 return;
             }
