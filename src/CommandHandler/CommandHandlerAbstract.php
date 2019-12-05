@@ -8,6 +8,8 @@ declare(strict_types=1);
 namespace JeckelLab\CommandDispatcher\CommandHandler;
 
 use JeckelLab\CommandDispatcher\Command\CommandInterface;
+use JeckelLab\CommandDispatcher\CommandResponse\CommandResponse;
+use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseInterface;
 use JeckelLab\CommandDispatcher\Exception\InvalidCommandException;
 
 /**
@@ -32,4 +34,25 @@ abstract class CommandHandlerAbstract implements CommandHandlerInterface
             get_class($command)
         ));
     }
+
+    /**
+     * @param CommandInterface $command
+     * @return CommandResponseInterface
+     */
+    public function __invoke(CommandInterface $command): CommandResponseInterface
+    {
+        $this->validateCommand($command);
+
+        return $this->process($command, new CommandResponse());
+    }
+
+    /**
+     * @param CommandInterface         $command
+     * @param CommandResponseInterface $commandResponse
+     * @return CommandResponseInterface
+     */
+    abstract protected function process(
+        CommandInterface $command,
+        CommandResponseInterface $commandResponse
+    ): CommandResponseInterface;
 }
