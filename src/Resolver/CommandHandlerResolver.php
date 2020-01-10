@@ -18,7 +18,7 @@ use Psr\Container\ContainerInterface;
 class CommandHandlerResolver implements CommandHandlerResolverInterface
 {
     /**
-     * @var array
+     * @var array<CommandHandlerInterface|string>
      */
     protected $handlers = [];
 
@@ -29,8 +29,8 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
 
     /**
      * CommandHandlerResolver constructor.
-     * @param array                   $handlers
-     * @param ContainerInterface|null $container
+     * @param array<CommandHandlerInterface|string> $handlers
+     * @param ContainerInterface|null               $container
      */
     public function __construct(array $handlers = [], ?ContainerInterface $container = null)
     {

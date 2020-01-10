@@ -14,12 +14,12 @@ namespace JeckelLab\CommandDispatcher\CommandResponse;
 trait CommandResponseEventsTrait
 {
     /**
-     * @var iterable|null
+     * @var iterable<mixed>|null
      */
     protected $events;
 
     /**
-     * @param iterable $events
+     * @param iterable<mixed> $events
      * @return self
      */
     public function setEvents(iterable $events): self
@@ -30,7 +30,7 @@ trait CommandResponseEventsTrait
     }
 
     /**
-     * @return iterable|null
+     * @return iterable<mixed>|null
      */
     public function getEvents(): ?iterable
     {
