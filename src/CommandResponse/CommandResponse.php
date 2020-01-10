@@ -18,8 +18,8 @@ class CommandResponse implements CommandResponseInterface
 
     /**
      * CommandResponseAbstract constructor.
-     * @param bool          $ack
-     * @param iterable|null $events
+     * @param bool                 $ack
+     * @param iterable<mixed>|null $events
      *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
