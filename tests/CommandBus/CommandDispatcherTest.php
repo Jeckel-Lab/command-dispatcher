@@ -3,7 +3,7 @@
 namespace Tests\JeckelLab\CommandDispatcher\CommandBus;
 
 use JeckelLab\CommandDispatcher\Command\CommandInterface;
-use JeckelLab\CommandDispatcher\CommandDispatcher;
+use JeckelLab\CommandDispatcher\CommandBus\CommandDispatcher;
 use JeckelLab\CommandDispatcher\CommandHandler\CommandHandlerInterface;
 use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseInterface;
 use JeckelLab\CommandDispatcher\Resolver\CommandHandlerResolverInterface;
