@@ -8,6 +8,7 @@
 
 # 2rd parties
 /vendor
+/composer.lock
 
 # Temporary files
 /.phpcs-cache
