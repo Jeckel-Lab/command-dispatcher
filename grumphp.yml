@@ -8,11 +8,10 @@ parameters:
                 - ./ruleset.xml
         psalm:
             config: psalm.xml
-            ignore_patterns:
-                - /^config/
             no_cache: true
             report: ~
-            #            output_format: compact
+            ignore_patterns:
+                - /^tests/
             threads: 1
             triggered_by: ['php']
             show_info: true

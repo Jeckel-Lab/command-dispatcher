@@ -12,7 +12,7 @@ script:
   - ./vendor/bin/phpunit --coverage-clover=coverage.xml
   - ./vendor/bin/phpmd src text cleancode,codesize,design,naming,unusedcode
   - ./vendor/bin/phpcs
-  - ./vendor/bin/phpstan analyse
+  - ./vendor/bin/psalm
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
