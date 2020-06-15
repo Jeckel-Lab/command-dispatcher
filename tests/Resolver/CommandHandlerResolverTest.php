@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Tests\JeckelLab\CommandDispatcher\Resolver;
 
-use JeckelLab\CommandDispatcher\CommandHandler\CommandHandlerInterface;
-use JeckelLab\CommandDispatcher\Command\CommandInterface;
 use JeckelLab\CommandDispatcher\Resolver\CommandHandlerResolver;
 use JeckelLab\CommandDispatcher\Resolver\HandlerNotFoundException;
+use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
@@ -23,7 +23,7 @@ final class CommandHandlerResolverTest extends TestCase
         $this->expectException(HandlerNotFoundException::class);
 
         $resolver = new CommandHandlerResolver();
-        $resolver->resolve($this->createMock(CommandInterface::class));
+        $resolver->resolve($this->createMock(Command::class));
     }
 
     /**
@@ -31,8 +31,8 @@ final class CommandHandlerResolverTest extends TestCase
      */
     public function testResolveWithoutContainer(): void
     {
-        $command = $this->createMock(CommandInterface::class);
-        $handler = $this->createMock(CommandHandlerInterface::class);
+        $command = $this->createMock(Command::class);
+        $handler = $this->createMock(CommandHandler::class);
 
         $resolver = new CommandHandlerResolver([get_class($command) => $handler]);
         $this->assertSame($handler, $resolver->resolve($command));
@@ -42,8 +42,8 @@ final class CommandHandlerResolverTest extends TestCase
     {
         $handlerName = 'command.handler';
 
-        $command = $this->createMock(CommandInterface::class);
-        $handler = $this->createMock(CommandHandlerInterface::class);
+        $command = $this->createMock(Command::class);
+        $handler = $this->createMock(CommandHandler::class);
         $container = $this->createMock(ContainerInterface::class);
         $container->expects($this->once())
             ->method('has')

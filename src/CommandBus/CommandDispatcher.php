@@ -9,16 +9,16 @@ declare(strict_types=1);
 
 namespace JeckelLab\CommandDispatcher\CommandBus;
 
-use JeckelLab\CommandDispatcher\Command\CommandInterface;
-use JeckelLab\CommandDispatcher\CommandHandler\CommandHandlerInterface;
-use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseInterface;
 use JeckelLab\CommandDispatcher\Resolver\CommandHandlerResolverInterface;
+use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\CommandBus;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandResponse\CommandResponse;
 
 /**
  * Class CommandDispatcher
  * @package JeckelLab\CommandDispatcher\CommandBus
  */
-class CommandDispatcher implements CommandBusInterface
+class CommandDispatcher implements CommandBus
 {
     /**
      * @var CommandHandlerResolverInterface
@@ -36,18 +36,13 @@ class CommandDispatcher implements CommandBusInterface
     }
 
     /**
-     * @param CommandInterface $command
-     * @return CommandResponseInterface
+     * @param Command $command
+     * @return CommandResponse
      * @SuppressWarnings(PHPMD.IfStatementAssignment)
      */
-    public function dispatch(CommandInterface $command): CommandResponseInterface
+    public function dispatch(Command $command): CommandResponse
     {
-        /** @var CommandHandlerInterface $handler */
         $handler = $this->resolver->resolve($command);
-
-        /** @var CommandResponseInterface $response */
-        $response = $handler($command);
-
-        return $response;
+        return $handler($command);
     }
 }

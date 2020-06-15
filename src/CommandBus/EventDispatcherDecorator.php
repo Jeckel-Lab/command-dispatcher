@@ -9,38 +9,39 @@ declare(strict_types=1);
 
 namespace JeckelLab\CommandDispatcher\CommandBus;
 
-use JeckelLab\CommandDispatcher\Command\CommandInterface;
-use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseInterface;
+use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\CommandBus;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandResponse\CommandResponse;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class EventDispatcherDecorator
  * @package JeckelLab\CommandDispatcher\CommandBus
  */
-class EventDispatcherDecorator implements CommandBusInterface
+class EventDispatcherDecorator implements CommandBus
 {
     /** @var EventDispatcherInterface */
     protected $eventDispatcher;
 
-    /** @var CommandBusInterface */
+    /** @var CommandBus */
     protected $next;
 
     /**
      * EventDispatcherDecorator constructor.
      * @param EventDispatcherInterface     $eventDispatcher
-     * @param CommandBusInterface $next
+     * @param CommandBus $next
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher, CommandBusInterface $next)
+    public function __construct(EventDispatcherInterface $eventDispatcher, CommandBus $next)
     {
         $this->eventDispatcher = $eventDispatcher;
         $this->next = $next;
     }
 
     /**
-     * @param CommandInterface $command
-     * @return CommandResponseInterface
+     * @param Command $command
+     * @return CommandResponse
      */
-    public function dispatch(CommandInterface $command): CommandResponseInterface
+    public function dispatch(Command $command): CommandResponse
     {
         $response = $this->next->dispatch($command);
 

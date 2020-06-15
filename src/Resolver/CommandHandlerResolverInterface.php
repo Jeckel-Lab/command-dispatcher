@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace JeckelLab\CommandDispatcher\Resolver;
 
-use JeckelLab\CommandDispatcher\CommandHandler\CommandHandlerInterface;
-use JeckelLab\CommandDispatcher\Command\CommandInterface;
+use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
 
 /**
  * Interface CommandHandlerResolverInterface
@@ -17,9 +17,9 @@ use JeckelLab\CommandDispatcher\Command\CommandInterface;
 interface CommandHandlerResolverInterface
 {
     /**
-     * @param CommandInterface $command
-     * @return CommandHandlerInterface
+     * @param Command $command
+     * @return CommandHandler
      * @throws HandlerNotFoundException
      */
-    public function resolve(CommandInterface $command): CommandHandlerInterface;
+    public function resolve(Command $command): CommandHandler;
 }

@@ -2,30 +2,35 @@
 
 namespace Tests\JeckelLab\CommandDispatcher\CommandBus;
 
-use JeckelLab\CommandDispatcher\Command\CommandInterface;
-use JeckelLab\CommandDispatcher\CommandBus\CommandBusInterface;
 use JeckelLab\CommandDispatcher\CommandBus\EventDispatcherDecorator;
-use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseInterface;
+use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\CommandBus;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandResponse\CommandResponse;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use stdClass;
 
+/**
+ * Class EventDispatcherDecoratorTest
+ * @package Tests\JeckelLab\CommandDispatcher\CommandBus
+ */
 class EventDispatcherDecoratorTest extends TestCase
 {
     /**
-     * @var CommandBusInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var CommandBus|MockObject
      */
     private $commandBus;
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|EventDispatcherInterface
+     * @var MockObject|EventDispatcherInterface
      */
     private $eventDispatcher;
     /**
-     * @var CommandInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var Command|MockObject
      */
     private $command;
     /**
-     * @var CommandResponseInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var CommandResponse|MockObject
      */
     private $response;
 
@@ -34,12 +39,12 @@ class EventDispatcherDecoratorTest extends TestCase
         parent::setUp();
 
         $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
-        $this->commandBus = $this->createMock(CommandBusInterface::class);
-        $this->command = $this->createMock(CommandInterface::class);
-        $this->response = $this->createMock(CommandResponseInterface::class);
+        $this->commandBus = $this->createMock(CommandBus::class);
+        $this->command = $this->createMock(Command::class);
+        $this->response = $this->createMock(CommandResponse::class);
     }
 
-    public function testDispatchWithoutEvent()
+    public function testDispatchWithoutEvent(): void
     {
         $this->commandBus->expects($this->once())
             ->method('dispatch')
@@ -52,7 +57,7 @@ class EventDispatcherDecoratorTest extends TestCase
         $this->assertSame($response, $this->response);
     }
 
-    public function testDispatchWithEvent()
+    public function testDispatchWithEvent(): void
     {
         $event = new stdClass();
 

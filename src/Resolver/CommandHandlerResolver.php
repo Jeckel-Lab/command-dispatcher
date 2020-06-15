@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace JeckelLab\CommandDispatcher\Resolver;
 
-use JeckelLab\CommandDispatcher\CommandHandler\CommandHandlerInterface;
-use JeckelLab\CommandDispatcher\Command\CommandInterface;
+use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -18,7 +18,7 @@ use Psr\Container\ContainerInterface;
 class CommandHandlerResolver implements CommandHandlerResolverInterface
 {
     /**
-     * @var array<CommandHandlerInterface|string>
+     * @var array<CommandHandler|string>
      */
     protected $handlers = [];
 
@@ -29,7 +29,7 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
 
     /**
      * CommandHandlerResolver constructor.
-     * @param array<CommandHandlerInterface|string> $handlers
+     * @param array<CommandHandler|string> $handlers
      * @param ContainerInterface|null               $container
      */
     public function __construct(array $handlers = [], ?ContainerInterface $container = null)
@@ -39,13 +39,13 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
     }
 
     /**
-     * @param CommandInterface $command
-     * @return CommandHandlerInterface
+     * @param Command $command
+     * @return CommandHandler
      */
-    public function resolve(CommandInterface $command): CommandHandlerInterface
+    public function resolve(Command $command): CommandHandler
     {
         $handler = $this->findHandler($command);
-        if ($handler instanceof CommandHandlerInterface) {
+        if ($handler instanceof CommandHandler) {
             return $handler;
         }
 
@@ -61,10 +61,10 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
     }
 
     /**
-     * @param CommandInterface $command
-     * @return CommandHandlerInterface|string
+     * @param Command $command
+     * @return CommandHandler|string
      */
-    protected function findHandler(CommandInterface $command)
+    protected function findHandler(Command $command)
     {
         if (isset($this->handlers[get_class($command)])) {
             return $this->handlers[get_class($command)];

@@ -1,28 +1,30 @@
 <?php
-declare(strict_types=1);
+
 /**
  * @author Julien Mercier-Rojas <julien@jeckel-lab.fr>
  * Created at : 14/11/2019
  */
 
+declare(strict_types=1);
+
 namespace JeckelLab\CommandDispatcher\CommandHandler;
 
-use JeckelLab\CommandDispatcher\Command\CommandInterface;
-use JeckelLab\CommandDispatcher\CommandResponse\CommandResponse;
-use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseInterface;
 use JeckelLab\CommandDispatcher\Exception\InvalidCommandException;
+use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandResponse\CommandResponse;
 
 /**
  * Class CommandHandlerAbstract
  * @package JeckelLab\CommandDispatcher\CommandHandler
  */
-abstract class CommandHandlerAbstract implements CommandHandlerInterface
+abstract class CommandHandlerAbstract implements CommandHandler
 {
     /**
-     * @param CommandInterface $command
+     * @param Command $command
      * @throws InvalidCommandException
      */
-    protected function validateCommand(CommandInterface $command): void
+    protected function validateCommand(Command $command): void
     {
         foreach (static::getHandledCommands() as $handledCommand) {
             if ($command instanceof $handledCommand) {
@@ -36,23 +38,19 @@ abstract class CommandHandlerAbstract implements CommandHandlerInterface
     }
 
     /**
-     * @param CommandInterface $command
-     * @return CommandResponseInterface
+     * @param Command $command
+     * @return CommandResponse
      */
-    public function __invoke(CommandInterface $command): CommandResponseInterface
+    public function __invoke(Command $command): CommandResponse
     {
         $this->validateCommand($command);
 
-        return $this->process($command, new CommandResponse());
+        return $this->process($command);
     }
 
     /**
-     * @param CommandInterface         $command
-     * @param CommandResponseInterface $commandResponse
-     * @return CommandResponseInterface
+     * @param Command $command
+     * @return CommandResponse
      */
-    abstract protected function process(
-        CommandInterface $command,
-        CommandResponseInterface $commandResponse
-    ): CommandResponseInterface;
+    abstract protected function process(Command $command): CommandResponse;
 }

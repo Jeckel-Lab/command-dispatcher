@@ -10,29 +10,12 @@ namespace JeckelLab\CommandDispatcher\CommandResponse;
 /**
  * Trait CommandResponseAckTrait
  * @package JeckelLab\CommandDispatcher\CommandResponse
+ * @psalm-immutable
  */
 trait CommandResponseAckTrait
 {
     /** @var bool */
     protected $ack = true;
-
-    /**
-     * @return self
-     */
-    public function ack(): self
-    {
-        $this->ack = true;
-        return $this;
-    }
-
-    /**
-     * @return self
-     */
-    public function nack(): self
-    {
-        $this->ack = false;
-        return $this;
-    }
 
     /**
      * @return bool

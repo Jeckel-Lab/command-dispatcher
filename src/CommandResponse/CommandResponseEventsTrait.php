@@ -7,6 +7,8 @@ declare(strict_types=1);
 
 namespace JeckelLab\CommandDispatcher\CommandResponse;
 
+use JeckelLab\Contract\Domain\Event\Event;
+
 /**
  * Trait CommandResponseEventsTrait
  * @package JeckelLab\CommandDispatcher\CommandResponse
@@ -14,23 +16,12 @@ namespace JeckelLab\CommandDispatcher\CommandResponse;
 trait CommandResponseEventsTrait
 {
     /**
-     * @var iterable<mixed>|null
+     * @var iterable<Event>|null
      */
     protected $events;
 
     /**
-     * @param iterable<mixed> $events
-     * @return self
-     */
-    public function setEvents(iterable $events): self
-    {
-        $this->events = $events;
-
-        return $this;
-    }
-
-    /**
-     * @return iterable<mixed>|null
+     * @return iterable<Event>|null
      */
     public function getEvents(): ?iterable
     {
