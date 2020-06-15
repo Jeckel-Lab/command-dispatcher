@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace Tests\JeckelLab\CommandDispatcher;
 
 use JeckelLab\CommandDispatcher\CommandDispatcher;
-use JeckelLab\CommandDispatcher\CommandHandler\CommandHandlerInterface;
-use JeckelLab\CommandDispatcher\Command\CommandInterface;
-use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseInterface;
 use JeckelLab\CommandDispatcher\Resolver\CommandHandlerResolverInterface;
 use JeckelLab\CommandDispatcher\Resolver\HandlerNotFoundException;
+use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandResponse\CommandResponse;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -20,17 +20,17 @@ use stdClass;
 final class CommandDispatcherTest extends TestCase
 {
     /**
-     * @var CommandInterface|MockObject
+     * @var Command|MockObject
      */
     protected $command;
 
     /**
-     * @var CommandResponseInterface|MockObject
+     * @var CommandResponse|MockObject
      */
     protected $response;
 
     /**
-     * @var CommandHandlerInterface|MockObject
+     * @var CommandHandler|MockObject
      */
     protected $handler;
 
@@ -51,9 +51,9 @@ final class CommandDispatcherTest extends TestCase
     {
         parent::setUp();
 
-        $this->command = $this->createMock(CommandInterface::class);
-        $this->response = $this->createMock(CommandResponseInterface::class);
-        $this->handler = $this->createMock(CommandHandlerInterface::class);
+        $this->command = $this->createMock(Command::class);
+        $this->response = $this->createMock(CommandResponse::class);
+        $this->handler = $this->createMock(CommandHandler::class);
         $this->resolver = $this->createMock(CommandHandlerResolverInterface::class);
         $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
     }

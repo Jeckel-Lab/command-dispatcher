@@ -2,27 +2,31 @@
 
 namespace Tests\JeckelLab\CommandDispatcher\CommandBus;
 
-use JeckelLab\CommandDispatcher\Command\CommandInterface;
 use JeckelLab\CommandDispatcher\CommandBus\CommandDispatcher;
-use JeckelLab\CommandDispatcher\CommandHandler\CommandHandlerInterface;
-use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseInterface;
 use JeckelLab\CommandDispatcher\Resolver\CommandHandlerResolverInterface;
 use JeckelLab\CommandDispatcher\Resolver\HandlerNotFoundException;
+use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandResponse\CommandResponse;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class CommandDispatcherTest
+ * @package Tests\JeckelLab\CommandDispatcher\CommandBus
+ */
 class CommandDispatcherTest extends TestCase
 {
     /**
-     * @var CommandInterface|MockObject
+     * @var Command|MockObject
      */
     private $command;
     /**
-     * @var CommandResponseInterface|MockObject
+     * @var CommandResponse|MockObject
      */
     private $response;
     /**
-     * @var CommandHandlerInterface|MockObject
+     * @var CommandHandler|MockObject
      */
     private $handler;
     /**
@@ -37,13 +41,13 @@ class CommandDispatcherTest extends TestCase
     {
         parent::setUp();
 
-        $this->command = $this->createMock(CommandInterface::class);
-        $this->response = $this->createMock(CommandResponseInterface::class);
-        $this->handler = $this->createMock(CommandHandlerInterface::class);
+        $this->command = $this->createMock(Command::class);
+        $this->response = $this->createMock(CommandResponse::class);
+        $this->handler = $this->createMock(CommandHandler::class);
         $this->resolver = $this->createMock(CommandHandlerResolverInterface::class);
     }
 
-    public function testDispatch()
+    public function testDispatch(): void
     {
         $this->response->expects($this->never())
             ->method('getEvents');

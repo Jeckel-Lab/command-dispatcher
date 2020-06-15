@@ -7,9 +7,13 @@ declare(strict_types=1);
 
 namespace JeckelLab\CommandDispatcher\CommandResponse;
 
+use JeckelLab\Contract\Core\CommandDispatcher\CommandResponse\CommandResponse as CommandResponseInterface;
+use JeckelLab\Contract\Domain\Event\Event;
+
 /**
  * Class CommandResponse
  * @package JeckelLab\CommandDispatcher\CommandResponse
+ * @psalm-immutable
  */
 class CommandResponse implements CommandResponseInterface
 {
@@ -19,7 +23,7 @@ class CommandResponse implements CommandResponseInterface
     /**
      * CommandResponseAbstract constructor.
      * @param bool                 $ack
-     * @param iterable<mixed>|null $events
+     * @param iterable<Event>|null $events
      *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
