@@ -9,10 +9,10 @@ declare(strict_types=1);
 
 namespace JeckelLab\CommandDispatcher\CommandHandler;
 
-use JeckelLab\CommandDispatcher\Exception\InvalidCommandException;
 use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandResponse\CommandResponse;
+use JeckelLab\Contract\Core\CommandDispatcher\Exception\InvalidCommandException;
 
 /**
  * Class CommandHandlerAbstract
