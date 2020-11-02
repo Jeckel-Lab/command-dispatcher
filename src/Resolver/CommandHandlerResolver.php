@@ -50,7 +50,9 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
         }
 
         if ($this->container !== null && $this->container->has($handler)) {
-            return $this->container->get($handler);
+            $instance = $this->container->get($handler);
+            assert($instance instanceof CommandHandler, 'Handler should be an instance of CommandHandler');
+            return $instance;
         }
 
         throw new HandlerNotFoundException(sprintf(
