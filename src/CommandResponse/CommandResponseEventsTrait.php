@@ -12,6 +12,7 @@ use JeckelLab\Contract\Domain\Event\Event;
 /**
  * Trait CommandResponseEventsTrait
  * @package JeckelLab\CommandDispatcher\CommandResponse
+ * @psalm-immutable
  */
 trait CommandResponseEventsTrait
 {
