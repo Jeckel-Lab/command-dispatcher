@@ -31,7 +31,6 @@ script:
   - ./vendor/bin/phpcs
   - ./vendor/bin/psalm
   - if [ "$TRAVIS_PHP_VERSION" == "7.3" ]; then ./vendor/bin/phpunit --coverage-clover coverage.xml; else ./vendor/bin/phpunit; fi
-  - ls -la
 
 after_success:
   - if [ "$TRAVIS_PHP_VERSION" == "7.3" ]; then bash <(curl -s https://codecov.io/bash) -f coverage.xml; fi
