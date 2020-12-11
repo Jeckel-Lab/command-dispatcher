@@ -54,12 +54,13 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
             assert($instance instanceof CommandHandler, 'Handler should be an instance of CommandHandler');
             return $instance;
         }
-
+        // @codeCoverageIgnoreStart
         throw new HandlerNotFoundException(sprintf(
             'No command handler instance for %s found in container for %s',
             $handler,
             get_class($command)
         ));
+        // @codeCoverageIgnoreEnd
     }
 
     /**
