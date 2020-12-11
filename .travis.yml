@@ -3,16 +3,34 @@ php:
   - '7.2'
   - '7.3'
   - '7.4'
+  - '8.0'
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.2
+      env: COMPOSER_FLAGS="--prefer-lowest"
 
 before_script:
   - travis_retry composer self-update
-  - travis_retry composer install --no-interaction --prefer-source --dev
+  - travis_retry composer update $COMPOSER_FLAGS --no-interaction --prefer-dist --dev
+  - phpenv config-rm xdebug.ini
+  - if [ "$TRAVIS_PHP_VERSION" == "7.3" ]; then
+      pecl install xdebug-2.9.8;
+      echo "zend_extension=xdebug.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
+      echo "XDEBUG_MODE=coverage" > xdebug.ini;
+      phpenv config-add xdebug.ini;
+    fi
 
 script:
-  - ./vendor/bin/phpunit --coverage-clover=coverage.xml
   - ./vendor/bin/phpmd src text ./ruleset.xml
   - ./vendor/bin/phpcs
   - ./vendor/bin/psalm
+  - if [ "$TRAVIS_PHP_VERSION" == "7.3" ]; then ./vendor/bin/phpunit --coverage-clover coverage.xml; else ./vendor/bin/phpunit; fi
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - if [ "$TRAVIS_PHP_VERSION" == "7.3" ]; then bash <(curl -s https://codecov.io/bash) -f coverage.xml; fi
