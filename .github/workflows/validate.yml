@@ -1,0 +1,67 @@
+name: validate
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  global-qa-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
+        with:
+          php-version: 7.4
+      - name: Get composer cache directory
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-7.4-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-7.4
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist --dev
+      - name: php MD
+        run: ./vendor/bin/phpmd src text ./ruleset.xml
+      - name: php CD
+        run: ./vendor/bin/phpcs
+      - name: PHPUnit Coverage
+        run: ./vendor/bin/phpunit --coverage-clover coverage.xml
+      - uses: codecov/codecov-action@v1
+
+  psalm-over-php-versions:
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: [ '7.2', '7.3', '7.4', '8.0' ]
+        include:
+          - php-versions: 7.2
+            env: COMPOSER_FLAGS="--prefer-lowest"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
+        with:
+          php-version: ${{ matrix.php-versions }}
+      - name: Get composer cache directory
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ matrix.php-versions }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-${{ matrix.php-versions }}
+      - name: Install dependencies
+        run: composer install $COMPOSER_FLAGS --no-interaction --prefer-dist --dev
+      - name: Psalm
+        run: ./vendor/bin/psalm
