@@ -10,22 +10,23 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class CommandResponseTest
  * @package CommandResponse
+ * @psalm-suppress PropertyNotSetInConstructor
  */
 final class CommandResponseTest extends TestCase
 {
     public function testAck(): void
     {
         $response = new CommandResponse();
-        $this->assertTrue($response->isAck());
-        $this->assertFalse($response->isNack());
+        $this->assertTrue($response->isSuccess());
+        $this->assertFalse($response->isFailure());
 
         $response = new CommandResponse(false);
-        $this->assertFalse($response->isAck());
-        $this->assertTrue($response->isNack());
+        $this->assertFalse($response->isSuccess());
+        $this->assertTrue($response->isFailure());
 
         $response = new CommandResponse(true);
-        $this->assertTrue($response->isAck());
-        $this->assertFalse($response->isNack());
+        $this->assertTrue($response->isSuccess());
+        $this->assertFalse($response->isFailure());
     }
 
     public function testConstructWithEvents(): void
@@ -35,6 +36,6 @@ final class CommandResponseTest extends TestCase
             $this->createMock(Event::class)
         ];
         $response = new CommandResponse(true, $events);
-        $this->assertSame($events, $response->getEvents());
+        $this->assertSame($events, $response->events());
     }
 }

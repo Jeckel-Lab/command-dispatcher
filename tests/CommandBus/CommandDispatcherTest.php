@@ -50,7 +50,7 @@ class CommandDispatcherTest extends TestCase
     public function testDispatch(): void
     {
         $this->response->expects($this->never())
-            ->method('getEvents');
+            ->method('events');
 
         $this->handler->expects($this->once())
             ->method('__invoke')

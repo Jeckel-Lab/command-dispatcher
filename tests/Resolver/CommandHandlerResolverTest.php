@@ -4,14 +4,15 @@ declare(strict_types=1);
 namespace Tests\JeckelLab\CommandDispatcher\Resolver;
 
 use JeckelLab\CommandDispatcher\Resolver\CommandHandlerResolver;
-use JeckelLab\CommandDispatcher\Resolver\HandlerNotFoundException;
 use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\Exception\NoHandlerDefinedForCommandException;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
 /**
  * Class CommandHandlerResolverTest
+ * @psalm-suppress PropertyNotSetInConstructor
  */
 final class CommandHandlerResolverTest extends TestCase
 {
@@ -20,7 +21,7 @@ final class CommandHandlerResolverTest extends TestCase
      */
     public function testResolveWithNoHandlers(): void
     {
-        $this->expectException(HandlerNotFoundException::class);
+        $this->expectException(NoHandlerDefinedForCommandException::class);
 
         $resolver = new CommandHandlerResolver();
         $resolver->resolve($this->createMock(Command::class));

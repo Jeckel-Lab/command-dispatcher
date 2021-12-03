@@ -18,16 +18,31 @@ use JeckelLab\Contract\Domain\Event\Event;
  */
 class CommandResponseSuccess implements CommandResponseInterface
 {
-    use CommandResponseAckTrait;
-    use CommandResponseEventsTrait;
-
     /**
      * CommandResponseAbstract constructor.
      * @param iterable<Event>|null $events
      */
-    public function __construct(?iterable $events = null)
+    public function __construct(protected ?iterable $events = null)
     {
-        $this->ack = true;
-        $this->events = $events;
+    }
+
+    public function isSuccess(): bool
+    {
+        return true;
+    }
+
+    public function isFailure(): bool
+    {
+        return false;
+    }
+
+    public function failureReason(): ?string
+    {
+        return null;
+    }
+
+    public function events(): ?iterable
+    {
+        return $this->events;
     }
 }
