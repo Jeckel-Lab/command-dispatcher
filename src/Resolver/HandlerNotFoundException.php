@@ -7,14 +7,16 @@ declare(strict_types=1);
 
 namespace JeckelLab\CommandDispatcher\Resolver;
 
+use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\Exception\CommandBusException;
 use JeckelLab\Contract\Core\Exception\RuntimeException;
 
 /**
  * Class HandlerNotFoundException
  * @package JeckelLab\CommandDispatcher\Resolver
  * @psalm-immutable
+ * @psalm-suppress MutableDependency
  */
-class HandlerNotFoundException extends RuntimeException
+class HandlerNotFoundException extends RuntimeException implements CommandBusException
 {
 
 }

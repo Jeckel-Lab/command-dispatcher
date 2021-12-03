@@ -8,7 +8,9 @@ declare(strict_types=1);
 namespace JeckelLab\CommandDispatcher\Resolver;
 
 use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
+use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\Exception\NoHandlerDefinedForCommandException;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -18,24 +20,19 @@ use Psr\Container\ContainerInterface;
 class CommandHandlerResolver implements CommandHandlerResolverInterface
 {
     /**
-     * @var array<CommandHandler|string>
+     * @var array<class-string<Command>, CommandHandler<Command>>
      */
-    protected $handlers = [];
-
-    /**
-     * @var ContainerInterface|null
-     */
-    protected $container;
+    private array $handlersInstance = [];
 
     /**
      * CommandHandlerResolver constructor.
-     * @param array<CommandHandler|string> $handlers
-     * @param ContainerInterface|null               $container
+     * @param array<class-string<Command>, CommandHandler|class-string<CommandHandler>> $handlers
+     * @param ContainerInterface|null $container
      */
-    public function __construct(array $handlers = [], ?ContainerInterface $container = null)
-    {
-        $this->handlers = $handlers;
-        $this->container = $container;
+    public function __construct(
+        protected array $handlers = [],
+        protected ?ContainerInterface $container = null
+    ) {
     }
 
     /**
@@ -44,41 +41,73 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
      */
     public function resolve(Command $command): CommandHandler
     {
-        $handler = $this->findHandler($command);
-        if ($handler instanceof CommandHandler) {
-            return $handler;
+        if (! isset($this->handlersInstance[get_class($command)])) {
+            $this->handlersInstance[get_class($command)] = $this->findHandlerInstance($command);
         }
 
-        if ($this->container !== null && $this->container->has($handler)) {
-            $instance = $this->container->get($handler);
-            assert($instance instanceof CommandHandler, 'Handler should be an instance of CommandHandler');
-            return $instance;
-        }
-        // @codeCoverageIgnoreStart
-        throw new HandlerNotFoundException(sprintf(
-            'No command handler instance for %s found in container for %s',
-            $handler,
-            get_class($command)
-        ));
-        // @codeCoverageIgnoreEnd
+        return $this->handlersInstance[get_class($command)];
     }
 
     /**
      * @param Command $command
-     * @return CommandHandler|string
+     * @return CommandHandler
      */
-    protected function findHandler(Command $command)
+    protected function findHandlerInstance(Command $command): CommandHandler
     {
+        $handler = $this->findConfiguredHandler($command);
+        // $handler is already an instance
+        if ($handler instanceof CommandHandler) {
+            return $handler;
+        }
+
+        // $handler is only the name of the class, we need the instance from container
+        if ($this->container !== null && $this->container->has($handler)) {
+            try {
+                $instance = $this->container->get($handler);
+            } catch (ContainerExceptionInterface $e) {
+                throw new HandlerNotFoundException(
+                    message:  sprintf(
+                        'No command handler instance for %s found in container for %s',
+                        $handler,
+                        get_class($command)
+                    ),
+                    previous: $e
+                );
+            }
+
+            if (!$instance instanceof CommandHandler) {
+                throw new InvalidHandlerProvidedException($instance);
+            }
+            return $instance;
+        }
+
+        throw new HandlerNotFoundException(
+            sprintf(
+                'No command handler instance for %s found in container for %s',
+                $handler,
+                get_class($command)
+            )
+        );
+    }
+
+    /**
+     * @param Command $command
+     * @return CommandHandler|class-string<CommandHandler>
+     */
+    protected function findConfiguredHandler(Command $command): CommandHandler|string
+    {
+        // Find direct command handler
         if (isset($this->handlers[get_class($command)])) {
             return $this->handlers[get_class($command)];
         }
 
+        // Find a command handler for a parent class or interface
         foreach ($this->handlers as $commandName => $handler) {
-            if ($command instanceof $commandName) {
+            if ($command instanceof $commandName || in_array($commandName, class_implements($command), true)) {
                 return $handler;
             }
         }
 
-        throw new HandlerNotFoundException(sprintf('No command handler found for %s', get_class($command)));
+        throw new NoHandlerDefinedForCommandException($command);
     }
 }

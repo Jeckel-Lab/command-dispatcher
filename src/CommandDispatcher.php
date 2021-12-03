@@ -18,6 +18,7 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 /**
  * Class CommandDispatcher
  * @package JeckelLab\CommandDispatcher
+ * @Deprecated see JeckelLab\CommandDispatcher\CommandBus\CommandDispatcher instead and decorators
  */
 class CommandDispatcher implements CommandBus
 {

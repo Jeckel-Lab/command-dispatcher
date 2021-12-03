@@ -20,10 +20,10 @@
     }
   },
   "require": {
-    "php": "^7.2 || ^8.0",
+    "php": ">=8.0",
     "psr/event-dispatcher": "^1.0",
-    "psr/container": "^1.0",
-    "jeckel-lab/contract": ">=1.1.1"
+    "psr/container": "^1.0 || ^2.0",
+    "jeckel-lab/contract": "dev-feature/optimize-command-bus"
   },
   "require-dev": {
     "phpunit/phpunit": "^8.5 || ^9.5",
