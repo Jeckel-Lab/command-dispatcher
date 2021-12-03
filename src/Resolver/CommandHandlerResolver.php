@@ -103,7 +103,7 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
 
         // Find a command handler for a parent class or interface
         foreach ($this->handlers as $commandName => $handler) {
-            if ($command instanceof $commandName || in_array($commandName, class_implements($command), true)) {
+            if ($command instanceof $commandName || in_array($commandName, class_implements($command) ?: [], true)) {
                 return $handler;
             }
         }

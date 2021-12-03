@@ -41,8 +41,11 @@ class CommandResponseFailure implements CommandResponseInterface
         return $this->failureReason;
     }
 
+    /**
+     * @return iterable<Event>|null
+     */
     public function events(): ?iterable
     {
-        return $this->events;
+        return $this->events; /** @phpstan-ignore-line */
     }
 }

@@ -41,8 +41,11 @@ class CommandResponseSuccess implements CommandResponseInterface
         return null;
     }
 
+    /**
+     * @return iterable<Event>|null
+     */
     public function events(): ?iterable
     {
-        return $this->events;
+        return $this->events; /** @phpstan-ignore-line */
     }
 }
