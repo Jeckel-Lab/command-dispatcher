@@ -7,14 +7,14 @@
 
 declare(strict_types=1);
 
-namespace JeckelLab\CommandDispatcher\CommandBus\Decorator;
+namespace JeckelLab\CommandDispatcher\Exception;
 
 use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\Exception\CommandBusException;
 use JeckelLab\Contract\Core\Exception\LogicException;
 
 /**
  * Class DecoratedCommandBusUndefinedException
- * @package JeckelLab\CommandDispatcher\CommandBus\Decorator
+ * @package JeckelLab\CommandDispatcher\Exception
  * @psalm-immutable
  * @psalm-suppress MutableDependency
  */

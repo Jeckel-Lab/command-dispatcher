@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace JeckelLab\CommandDispatcher\CommandHandler;
+namespace JeckelLab\CommandDispatcher\Exception;
 
 use JeckelLab\Contract\Core\CommandDispatcher\Exception\InvalidCommandException;
 

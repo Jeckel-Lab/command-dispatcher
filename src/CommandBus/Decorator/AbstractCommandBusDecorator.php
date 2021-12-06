@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace JeckelLab\CommandDispatcher\CommandBus\Decorator;
 
+use JeckelLab\CommandDispatcher\Exception\DecoratedCommandBusUndefinedException;
 use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\CommandBus;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandResponse\CommandResponse;
@@ -17,7 +18,7 @@ use JeckelLab\Contract\Core\CommandDispatcher\CommandResponse\CommandResponse;
  * Class AbstractCommandBusDecorator
  * @package JeckelLab\CommandDispatcher\CommandBus\Decorator
  */
-class AbstractCommandBusDecorator implements CommandBusDecorator
+abstract class AbstractCommandBusDecorator implements CommandBusDecorator
 {
     /** @var CommandBus|null */
     private ?CommandBus $commandBus = null;
@@ -51,6 +52,7 @@ class AbstractCommandBusDecorator implements CommandBusDecorator
     /**
      * @param Command $command
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @infection-ignore-all
      */
     protected function preDispatch(Command $command): void
     {
@@ -61,6 +63,7 @@ class AbstractCommandBusDecorator implements CommandBusDecorator
      * @param CommandResponse $response
      * @return CommandResponse
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @infection-ignore-all
      */
     protected function postDispatch(Command $command, CommandResponse $response): CommandResponse
     {

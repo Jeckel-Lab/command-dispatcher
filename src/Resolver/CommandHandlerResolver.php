@@ -7,6 +7,8 @@ declare(strict_types=1);
 
 namespace JeckelLab\CommandDispatcher\Resolver;
 
+use JeckelLab\CommandDispatcher\Exception\HandlerNotFoundException;
+use JeckelLab\CommandDispatcher\Exception\InvalidHandlerProvidedException;
 use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\Exception\NoHandlerDefinedForCommandException;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
@@ -52,7 +54,7 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
      * @param Command $command
      * @return CommandHandler
      */
-    protected function findHandlerInstance(Command $command): CommandHandler
+    private function findHandlerInstance(Command $command): CommandHandler
     {
         $handler = $this->findConfiguredHandler($command);
         // $handler is already an instance
@@ -94,7 +96,7 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
      * @param Command $command
      * @return CommandHandler|class-string<CommandHandler>
      */
-    protected function findConfiguredHandler(Command $command): CommandHandler|string
+    private function findConfiguredHandler(Command $command): CommandHandler|string
     {
         // Find direct command handler
         if (isset($this->handlers[get_class($command)])) {
@@ -103,6 +105,7 @@ class CommandHandlerResolver implements CommandHandlerResolverInterface
 
         // Find a command handler for a parent class or interface
         foreach ($this->handlers as $commandName => $handler) {
+            /** @infection-ignore-all */
             if ($command instanceof $commandName || in_array($commandName, class_implements($command) ?: [], true)) {
                 return $handler;
             }

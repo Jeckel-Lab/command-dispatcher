@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class CommandResponseTest extends TestCase
 {
-    public function testAck(): void
+    public function testConstruct(): void
     {
         $response = new CommandResponse();
         $this->assertTrue($response->isSuccess());
@@ -37,5 +37,11 @@ final class CommandResponseTest extends TestCase
         ];
         $response = new CommandResponse(true, $events);
         $this->assertSame($events, $response->events());
+    }
+
+    public function testConstructFailure(): void
+    {
+        $response = new CommandResponse(false, [], 'Not possible');
+        $this->assertSame('Not possible', $response->failureReason());
     }
 }

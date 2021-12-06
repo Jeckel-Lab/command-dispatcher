@@ -7,14 +7,14 @@
 
 declare(strict_types=1);
 
-namespace JeckelLab\CommandDispatcher\Resolver;
+namespace JeckelLab\CommandDispatcher\Exception;
 
 use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\Exception\CommandBusException;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
 
 /**
  * Class InvalidHandlerProvidedException
- * @package JeckelLab\CommandDispatcher\Resolver
+ * @package JeckelLab\CommandDispatcher\Exception
  * @psalm-immutable
  * @psalm-suppress MutableDependency
  */

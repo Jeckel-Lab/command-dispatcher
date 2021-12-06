@@ -7,7 +7,7 @@
 
 namespace Tests\JeckelLab\CommandDispatcher\CommandBus\Decorator;
 
-use JeckelLab\CommandDispatcher\CommandBus\Decorator\DecoratedCommandBusUndefinedException;
+use JeckelLab\CommandDispatcher\Exception\DecoratedCommandBusUndefinedException;
 use JeckelLab\CommandDispatcher\CommandBus\Decorator\LoggerDecorator;
 use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseFailure;
 use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseSuccess;
@@ -19,9 +19,9 @@ use Tests\JeckelLab\CommandDispatcher\Fixtures\FixtureCommand;
 /**
  * Class CommandBusLoggerDecoratorTest
  * @package Tests\JeckelLab\CommandDispatcher\CommandBus\Decorator
- *  @psalm-suppress PropertyNotSetInConstructor
+ * @psalm-suppress PropertyNotSetInConstructor
  */
-class CommandBusLoggerDecoratorTest extends TestCase
+class LoggerDecoratorTest extends TestCase
 {
     public function testDispatchWithoutDefinedDecoratedCommandBusShouldFail(): void
     {

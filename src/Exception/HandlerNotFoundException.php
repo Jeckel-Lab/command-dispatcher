@@ -5,14 +5,14 @@ declare(strict_types=1);
  * Created at : 27/10/2019
  */
 
-namespace JeckelLab\CommandDispatcher\Resolver;
+namespace JeckelLab\CommandDispatcher\Exception;
 
 use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\Exception\CommandBusException;
 use JeckelLab\Contract\Core\Exception\RuntimeException;
 
 /**
  * Class HandlerNotFoundException
- * @package JeckelLab\CommandDispatcher\Resolver
+ * @package JeckelLab\CommandDispatcher\Exception
  * @psalm-immutable
  * @psalm-suppress MutableDependency
  */

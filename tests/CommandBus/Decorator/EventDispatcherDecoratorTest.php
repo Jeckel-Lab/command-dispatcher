@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Tests\JeckelLab\CommandDispatcher\CommandBus\Decorator;
 
-use JeckelLab\CommandDispatcher\CommandBus\Decorator\DecoratedCommandBusUndefinedException;
+use JeckelLab\CommandDispatcher\Exception\DecoratedCommandBusUndefinedException;
 use JeckelLab\CommandDispatcher\CommandBus\Decorator\EventDispatcherDecorator;
 use JeckelLab\CommandDispatcher\CommandResponse\CommandResponseSuccess;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\CommandBus;
