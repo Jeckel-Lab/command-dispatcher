@@ -21,9 +21,9 @@
   },
   "require": {
     "php": ">=8.0",
-    "psr/event-dispatcher": "^1.0",
-    "psr/container": "^1.0 || ^2.0",
-    "jeckel-lab/contract": "dev-feature/optimize-command-bus",
+    "psr/event-dispatcher": "*",
+    "psr/container": "*",
+    "jeckel-lab/contract": "dev-main",
     "psr/log": "*"
   },
   "require-dev": {
