@@ -6,7 +6,6 @@ grumphp:
                 - phpcs
                 - phpmd
                 - phpstan
-                - infection
                 - psalm
     tasks:
         composer_require_checker:
