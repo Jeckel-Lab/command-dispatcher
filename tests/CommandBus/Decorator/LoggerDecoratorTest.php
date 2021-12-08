@@ -27,7 +27,7 @@ class LoggerDecoratorTest extends TestCase
     {
         $command = new FixtureCommand();
 
-        $commandBusDecorated = new LoggerDecorator();
+        $commandBusDecorated = new LoggerDecorator($this->createMock(LoggerInterface::class));
 
         try {
             $commandBusDecorated->dispatch($command);
@@ -39,38 +39,6 @@ class LoggerDecoratorTest extends TestCase
             return;
         }
         $this->fail('Exception not thrown');
-    }
-
-    public function testDecorateWithoutLoggerAndSuccessResponseShouldNotFail(): void
-    {
-        $command = new FixtureCommand();
-        $response = new CommandResponseSuccess();
-        $commandBus = $this->createMock(CommandBus::class);
-        $commandBus->expects($this->once())
-            ->method('dispatch')
-            ->with($command)
-            ->willReturn($response);
-
-        $commandBusDecorated = new LoggerDecorator();
-        $commandBusDecorated->decorate($commandBus);
-
-        $this->assertSame($response, $commandBusDecorated->dispatch($command));
-    }
-
-    public function testDecorateWithoutLoggerAndErrorResponseShouldNotFail(): void
-    {
-        $command = new FixtureCommand();
-        $response = new CommandResponseFailure([], 'Failure');
-        $commandBus = $this->createMock(CommandBus::class);
-        $commandBus->expects($this->once())
-            ->method('dispatch')
-            ->with($command)
-            ->willReturn($response);
-
-        $commandBusDecorated = new LoggerDecorator();
-        $commandBusDecorated->decorate($commandBus);
-
-        $this->assertSame($response, $commandBusDecorated->dispatch($command));
     }
 
     public function testDecorateWithLoggerAndSuccessResponseShouldNotFail(): void
@@ -91,9 +59,8 @@ class LoggerDecoratorTest extends TestCase
                 ['Dispatch command Tests\JeckelLab\CommandDispatcher\Fixtures\FixtureCommand success']
             );
 
-        $commandBusDecorated = new LoggerDecorator();
+        $commandBusDecorated = new LoggerDecorator($logger);
         $commandBusDecorated->decorate($commandBus);
-        $commandBusDecorated->setLogger($logger);
 
         $this->assertSame($response, $commandBusDecorated->dispatch($command));
     }
@@ -118,9 +85,8 @@ class LoggerDecoratorTest extends TestCase
                 'Dispatch command Tests\JeckelLab\CommandDispatcher\Fixtures\FixtureCommand failed because: Failure'
             );
 
-        $commandBusDecorated = new LoggerDecorator();
+        $commandBusDecorated = new LoggerDecorator($logger);
         $commandBusDecorated->decorate($commandBus);
-        $commandBusDecorated->setLogger($logger);
 
         $this->assertSame($response, $commandBusDecorated->dispatch($command));
     }

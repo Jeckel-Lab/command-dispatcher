@@ -13,21 +13,24 @@ use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandResponse\CommandResponse;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class LoggerDecorator
  * @package JeckelLab\CommandDispatcher\CommandBus\Decorator
  */
-class LoggerDecorator extends AbstractCommandBusDecorator implements LoggerAwareInterface
+class LoggerDecorator extends AbstractCommandBusDecorator
 {
-    use LoggerAwareTrait;
+    public function __construct(private LoggerInterface $logger)
+    {
+    }
 
     /**
      * @param Command $command
      */
     protected function preDispatch(Command $command): void
     {
-        $this->logger?->debug(
+        $this->logger->debug(
             sprintf('Start dispatch command: %s', get_class($command))
         );
     }
@@ -40,10 +43,10 @@ class LoggerDecorator extends AbstractCommandBusDecorator implements LoggerAware
     protected function postDispatch(Command $command, CommandResponse $response): CommandResponse
     {
         if ($response->isSuccess()) {
-            $this->logger?->debug(sprintf('Dispatch command %s success', get_class($command)));
+            $this->logger->debug(sprintf('Dispatch command %s success', get_class($command)));
             return $response;
         }
-        $this->logger?->warning(
+        $this->logger->warning(
             sprintf(
                 'Dispatch command %s failed because: %s',
                 get_class($command),
