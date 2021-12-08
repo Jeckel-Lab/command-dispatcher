@@ -1,23 +1,14 @@
 grumphp:
+    testsuites:
+        github_actions:
+            tasks:
+                - composer_require_checker
+                - phpcs
+                - phpmd
+                - phpstan
+                - infection
+                - psalm
     tasks:
-        phpcs: null
-        phpmd:
-            whitelist_patterns:
-                - /^src\/(.*)/
-            ruleset:
-                - ./ruleset.xml
-        psalm:
-            config: psalm.xml
-            no_cache: true
-            report: ~
-            ignore_patterns:
-                - /^tests/
-            threads: 1
-            triggered_by: ['php']
-            show_info: true
-
-        phpunit: null
-
         composer_require_checker:
             composer_file: 'composer.json'
             config_file: ~
@@ -34,4 +25,25 @@ grumphp:
                 - "main"
             additional_modifiers: ''
             allow_detached_head: true
+        phpcs: null
+        phpmd:
+            whitelist_patterns:
+                - /^src\/(.*)/
+            ruleset:
+                - ./ruleset.xml
+        phpstan:
+            configuration: phpstan.neon
+            use_grumphp_paths: true
+        phpunit: null
         infection:
+        psalm:
+            config: psalm.xml
+            no_cache: true
+            report: ~
+            ignore_patterns:
+                - /^tests/
+            threads: 1
+            triggered_by: ['php']
+            show_info: true
+
+
