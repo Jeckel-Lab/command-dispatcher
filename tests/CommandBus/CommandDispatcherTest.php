@@ -4,7 +4,7 @@ namespace Tests\JeckelLab\CommandDispatcher\CommandBus;
 
 use JeckelLab\CommandDispatcher\CommandBus\CommandDispatcher;
 use JeckelLab\CommandDispatcher\Resolver\CommandHandlerResolverInterface;
-use JeckelLab\CommandDispatcher\Resolver\HandlerNotFoundException;
+use JeckelLab\CommandDispatcher\Exception\HandlerNotFoundException;
 use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandResponse\CommandResponse;
@@ -14,6 +14,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class CommandDispatcherTest
  * @package Tests\JeckelLab\CommandDispatcher\CommandBus
+ * @psalm-suppress PropertyNotSetInConstructor
  */
 class CommandDispatcherTest extends TestCase
 {
@@ -50,7 +51,7 @@ class CommandDispatcherTest extends TestCase
     public function testDispatch(): void
     {
         $this->response->expects($this->never())
-            ->method('getEvents');
+            ->method('events');
 
         $this->handler->expects($this->once())
             ->method('__invoke')

@@ -17,19 +17,40 @@ use JeckelLab\Contract\Domain\Event\Event;
  */
 class CommandResponse implements CommandResponseInterface
 {
-    use CommandResponseAckTrait;
-    use CommandResponseEventsTrait;
-
     /**
      * CommandResponseAbstract constructor.
-     * @param bool                 $ack
+     * @param bool          $ack
      * @param iterable<Event>|null $events
-     *
+     * @param string|null   $failureReason
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
-    public function __construct(bool $ack = true, ?iterable $events = null)
+    public function __construct(
+        protected bool $ack = true,
+        protected ?iterable $events = null,
+        protected ?string $failureReason = null
+    ) {
+    }
+
+    public function isSuccess(): bool
     {
-        $this->ack = $ack;
-        $this->events = $events;
+        return $this->ack;
+    }
+
+    public function isFailure(): bool
+    {
+        return ! $this->ack;
+    }
+
+    public function failureReason(): ?string
+    {
+        return $this->failureReason;
+    }
+
+    /**
+     * @return iterable<Event>|null
+     */
+    public function events(): ?iterable
+    {
+        return $this->events; /** @phpstan-ignore-line */
     }
 }

@@ -21,18 +21,12 @@ use JeckelLab\Contract\Core\CommandDispatcher\CommandResponse\CommandResponse;
 class CommandDispatcher implements CommandBus
 {
     /**
-     * @var CommandHandlerResolverInterface
-     */
-    protected $resolver;
-
-    /**
      * CommandDispatcher constructor.
      * @param CommandHandlerResolverInterface $resolver
      */
     public function __construct(
-        CommandHandlerResolverInterface $resolver
+        protected CommandHandlerResolverInterface $resolver
     ) {
-        $this->resolver = $resolver;
     }
 
     /**
