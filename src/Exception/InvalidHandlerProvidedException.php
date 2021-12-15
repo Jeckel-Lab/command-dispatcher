@@ -38,7 +38,7 @@ class InvalidHandlerProvidedException extends \InvalidArgumentException implemen
                 CommandHandler::class
             ),
             default => sprintf(
-                'Invalid command handler provided, command needs to be an implementation of %s interface',
+                'Invalid command handler provided, handler needs to be an implementation of %s interface',
                 CommandHandler::class
             )
         };
