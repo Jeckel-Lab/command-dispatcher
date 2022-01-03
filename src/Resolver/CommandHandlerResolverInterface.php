@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace JeckelLab\CommandDispatcher\Resolver;
 
 use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
-use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\Exception\NoHandlerDefinedForCommandException;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
+use JeckelLab\Contract\Core\CommandDispatcher\Exception\NoHandlerDefinedForCommandException;
 
 /**
  * Interface CommandHandlerResolverInterface

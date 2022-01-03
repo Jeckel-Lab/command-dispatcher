@@ -10,8 +10,8 @@ namespace JeckelLab\CommandDispatcher\Resolver;
 use JeckelLab\CommandDispatcher\Exception\HandlerNotFoundException;
 use JeckelLab\CommandDispatcher\Exception\InvalidHandlerProvidedException;
 use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
-use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\Exception\NoHandlerDefinedForCommandException;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
+use JeckelLab\Contract\Core\CommandDispatcher\Exception\NoHandlerDefinedForCommandException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 

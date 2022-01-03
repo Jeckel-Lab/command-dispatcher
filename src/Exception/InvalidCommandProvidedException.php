@@ -8,14 +8,14 @@ declare(strict_types=1);
 
 namespace JeckelLab\CommandDispatcher\Exception;
 
-use JeckelLab\Contract\Core\CommandDispatcher\Exception\InvalidCommandException;
+use JeckelLab\Contract\Core\CommandDispatcher\Exception\InvalidCommandTypeException;
 
 /**
  * Class InvalidCommandProvidedException
  * @package JeckelLab\CommandDispatcher\CommandHandler
  * @psalm-immutable
  */
-class InvalidCommandProvidedException extends InvalidCommandException
+class InvalidCommandProvidedException extends InvalidCommandTypeException
 {
     public function __construct(string $expectedCommandFqcn, string $providedCommandFqcn)
     {

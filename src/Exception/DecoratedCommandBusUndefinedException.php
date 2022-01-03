@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace JeckelLab\CommandDispatcher\Exception;
 
-use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\Exception\CommandBusException;
-use JeckelLab\Contract\Core\Exception\LogicException;
+use JeckelLab\Contract\Core\CommandDispatcher\Exception\CommandDispatcherException;
+use LogicException;
 
 /**
  * Class DecoratedCommandBusUndefinedException
@@ -18,7 +18,7 @@ use JeckelLab\Contract\Core\Exception\LogicException;
  * @psalm-immutable
  * @psalm-suppress MutableDependency
  */
-class DecoratedCommandBusUndefinedException extends LogicException implements CommandBusException
+class DecoratedCommandBusUndefinedException extends LogicException implements CommandDispatcherException
 {
     public function __construct()
     {

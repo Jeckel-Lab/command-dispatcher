@@ -35,7 +35,7 @@ class InvalidHandlerProvidedExceptionTest extends TestCase
 
         // phpcs:disable
         $this->assertEquals(
-            'Invalid command handler provided, command needs to be an implementation of JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler interface',
+            'Invalid command handler provided, handler needs to be an implementation of JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler interface',
             $exception->getMessage()
         );
         // phpcs:enable
