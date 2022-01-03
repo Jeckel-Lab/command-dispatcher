@@ -12,7 +12,7 @@ namespace JeckelLab\CommandDispatcher\Exception;
 use JeckelLab\Contract\Core\CommandDispatcher\Command\Command;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
 use JeckelLab\Contract\Core\CommandDispatcher\Exception\CommandDispatcherException;
-use JeckelLab\Contract\Core\Exception\RuntimeException;
+use RuntimeException;
 
 /**
  * Class HandlerForCommandAlreadyDefinedException

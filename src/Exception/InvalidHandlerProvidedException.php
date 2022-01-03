@@ -9,8 +9,9 @@ declare(strict_types=1);
 
 namespace JeckelLab\CommandDispatcher\Exception;
 
-use JeckelLab\Contract\Core\CommandDispatcher\CommandBus\Exception\CommandBusException;
+use InvalidArgumentException;
 use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
+use JeckelLab\Contract\Core\CommandDispatcher\Exception\CommandDispatcherException;
 
 /**
  * Class InvalidHandlerProvidedException
@@ -18,7 +19,7 @@ use JeckelLab\Contract\Core\CommandDispatcher\CommandHandler\CommandHandler;
  * @psalm-immutable
  * @psalm-suppress MutableDependency
  */
-class InvalidHandlerProvidedException extends \InvalidArgumentException implements CommandBusException
+class InvalidHandlerProvidedException extends InvalidArgumentException implements CommandDispatcherException
 {
     /**
      * @param mixed $handlerClassName
