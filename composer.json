@@ -23,7 +23,7 @@
     "php": ">=8.0",
     "psr/event-dispatcher": "*",
     "psr/container": "*",
-    "jeckel-lab/contract": "dev-main",
+    "jeckel-lab/contract": "~2.3",
     "psr/log": "*"
   },
   "require-dev": {
