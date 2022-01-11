@@ -35,6 +35,6 @@
     "phpstan/phpstan": "^1.2",
     "roave/security-advisories": "dev-latest",
     "maglnet/composer-require-checker": "^3.5",
-    "infection/infection": "^0.25.3"
+    "infection/infection": "^0.25.3 || ^0.26.0"
   }
 }
