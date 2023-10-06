@@ -6,7 +6,6 @@ grumphp:
                 - phpcs
                 - phpmd
                 - phpstan
-                - psalm
     tasks:
         composer_require_checker:
             composer_file: 'composer.json'
@@ -35,14 +34,5 @@ grumphp:
             use_grumphp_paths: true
         phpunit: null
         infection:
-        psalm:
-            config: psalm.xml
-            no_cache: true
-            report: ~
-            ignore_patterns:
-                - /^tests/
-            threads: 1
-            triggered_by: ['php']
-            show_info: true
 
 
